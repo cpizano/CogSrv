@@ -4,7 +4,6 @@ import (
     "encoding/json"
     "fmt"
     "net/http"
-    "strconv"
 
     "appengine"
 )
@@ -27,12 +26,19 @@ func top_handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func reg_handler(w http.ResponseWriter, r *http.Request) {
-    id, _ := strconv.Atoi(r.FormValue("id"))
-    // fmt.Fprintf(w, "registering %d\n", id)
-	rm := map[string]int{}
-	rm["clientid"] = id
-	rm["foo"] = 666
+  
+  id := r.FormValue("id")
+  if id != "BA234588134" {
+		w.WriteHeader(500)
+		fmt.Fprint(w, "bad client")
+		return  
+  }
 
+ 	rm := map[string]string{}
+	rm["clientid"] = id;
+	rm["topic"] = r.FormValue("tp");
+  rm["update"] = "http://foobar/file.exe"
+  
 	writeJSON(w, rm)
 }
 
@@ -43,6 +49,6 @@ func writeJSON(w http.ResponseWriter, i interface{}) {
 		fmt.Fprintf(w, "json.Marshal failed: %v", err)
 		return
 	}
+  w.Header().Set("Content-Type", "text/foobar; charset=utf-8")
 	w.Write(buf)
 }
-
