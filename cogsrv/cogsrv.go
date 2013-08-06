@@ -28,7 +28,7 @@ func top_handler(w http.ResponseWriter, r *http.Request) {
 func reg_handler(w http.ResponseWriter, r *http.Request) {
   
   id := r.FormValue("id")
-  if id != "BA234588134" {
+  if id != "3db31ee9cf28" {
 		w.WriteHeader(500)
 		fmt.Fprint(w, "bad client")
 		return  
@@ -37,7 +37,7 @@ func reg_handler(w http.ResponseWriter, r *http.Request) {
  	rm := map[string]string{}
 	rm["clientid"] = id;
 	rm["topic"] = r.FormValue("tp");
-  rm["update"] = "http://foobar/file.exe"
+  rm["update"] = "http://i.imgur.com/1b5X8Vl.jpg"
   
 	writeJSON(w, rm)
 }
@@ -49,6 +49,6 @@ func writeJSON(w http.ResponseWriter, i interface{}) {
 		fmt.Fprintf(w, "json.Marshal failed: %v", err)
 		return
 	}
-  w.Header().Set("Content-Type", "text/foobar; charset=utf-8")
+  w.Header().Set("Content-Type", "text/json; charset=utf-8")
 	w.Write(buf)
 }
