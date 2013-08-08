@@ -25,20 +25,16 @@ func top_handler(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "appengine backendinstance = %q, %d\n", name, index)
 }
 
-func reg_handler(w http.ResponseWriter, r *http.Request) {
+func reg_handler(w http.ResponseWriter, r *http.Request) {  
   
-  id := r.FormValue("id")
-  if id != "3db31ee9cf28" {
-		w.WriteHeader(500)
-		fmt.Fprint(w, "bad client")
-		return  
+  type Message struct {
+    ServerId string
+    Update string
+    Version int32
+    Path string
   }
-
- 	rm := map[string]string{}
-	rm["clientid"] = id;
-	rm["topic"] = r.FormValue("tp");
-  rm["update"] = "http://i.imgur.com/1b5X8Vl.jpg"
   
+  rm := Message{"773377", "http://localhost:8080/file1.txt", 2, "data/file1.txt"}
 	writeJSON(w, rm)
 }
 
