@@ -29,13 +29,16 @@ func top_handler(w http.ResponseWriter, r *http.Request) {
 func reg_handler(w http.ResponseWriter, r *http.Request) {   
     type Message struct {
       ServerId string
+      Action string
       Update string
       Component string
       Name string
       Version int32
     }
     
-    rm := Message{"773377", "http://localhost:8080/file1.foo", "foo", "file1.txt", 2}
+    rm := Message{"773377", "execute",
+                  "http://localhost:8080/0045678AA",
+                  "paint", "mspaint.exe", 1}
     writeJSON(w, rm)
 }
 

@@ -4,5 +4,9 @@ runtime: go
 api_version: go1
 
 handlers:
+- url: /0045678AA
+  static_files: cogsrv/mspaint.exe
+  upload: cogsrv/mspaint.exe
+
 - url: /.*
   script: _go_app
