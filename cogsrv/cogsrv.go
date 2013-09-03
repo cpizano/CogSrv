@@ -21,6 +21,9 @@ func top_handler(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "cogsrv  (c) 2013 vortex code\n")
     fmt.Fprintf(w, "appengine app id = %q\n", appengine.AppID(c))
     fmt.Fprintf(w, "appengine version = %q\n", appengine.VersionID(c))
+    
+    huri :=  "http://" + r.Host
+    fmt.Fprintf(w, "host is %s\n", huri)
 
     name, index := appengine.BackendInstance(c)
     fmt.Fprintf(w, "appengine backendinstance = %q, %d\n", name, index)
@@ -36,8 +39,10 @@ func reg_handler(w http.ResponseWriter, r *http.Request) {
       Version int32
     }
     
+    duri :=  "http://" + r.Host + "/0045678AA";
+    
     rm := Message{"773377", "execute",
-                  "http://localhost:8080/0045678AA",
+                  duri,
                   "paint", "mspaint.exe", 1}
     writeJSON(w, rm)
 }
