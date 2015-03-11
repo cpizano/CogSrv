@@ -18,7 +18,7 @@ func top_handler(w http.ResponseWriter, r *http.Request) {
     c := appengine.NewContext(r)
     w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 
-    fmt.Fprintf(w, "cogsrv  (c) 2013 vortex code\n")
+    fmt.Fprintf(w, "cogsrv  (c) 2015 vortex code\n")
     fmt.Fprintf(w, "appengine app id = %q\n", appengine.AppID(c))
     fmt.Fprintf(w, "appengine version = %q\n", appengine.VersionID(c))
     
